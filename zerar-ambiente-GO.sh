@@ -1,0 +1,47 @@
+#! /bin/bash
+clear
+echo " "
+echo " Todo ambiente GO será encerrado. Iniciando em 10 segundos, para cancelar CTRL + C"
+echo " "
+echo " A configuração de conexão com o banco de dados  PostgreSql deverá ser criada manualmente novamente dentro do pgAdmin, caso não queira continual, CTLR + C"
+echo " " 
+echo " Lembrando que para criar a nova conexão de bando será necessário pegar o IP do conteiner usando o comando abaixo:"
+echo " "
+echo " sudo docker inspect f2-modulo1-curso1-projeto-go-testes-postgres-1 | grep IPAddress"
+echo " "
+echo " address  : conteiner IP"
+echo " port     : 5432 "
+echo " Databae  : root"
+echo " Username : root"
+echo " Password : root"
+echo " "   
+sleep 10
+echo " Iniciando a destruição do ambiente..."
+echo " "
+sudo docker rm --force f2-modulo1-curso1-projeto-go-testes-pgadmin-compose-1
+echo " "
+echo " Conteiner PGAdmin apagado."
+echo " " 
+sudo docker rm --force f2-modulo1-curso1-projeto-go-testes-postgres-1
+echo " "
+echo " Conteiner do banco de dados PostGreSQL apagado."
+echo " "
+echo " Apagarndo as imagens dos conteiners PostgreSQL de PGAdmin..."
+echo " "
+sudo docker rmi dpage/pgadmin4 postgres
+echo "Imagens dos conteineres foram agagadas..."
+echo " " 
+echo " Para parar a aplicação, no terminal  que está rodando a aplicação CTRL + C."
+echo " "
+echo " Identificação do PID do processo onde a aplicação está rodando."
+echo " "
+ps aux | grep main.go | grep -v grep | head -n 1 | awk '{print $2}'
+echo " "
+echo " Matando o processo... "
+echo " "
+sudo kill -9 $(ps aux | grep main.go | grep -v grep | head -n 1 | awk '{print $2}')
+echo " "
+echo "Aplicação encerrada!"
+echo " " 
+echo " Para subir novamente a infraestrutura e a aplicação, no terminal 1/4 execute: ( ./criar-ambiente.sh ) e siga o passo a passo novamente. "
+echo " "

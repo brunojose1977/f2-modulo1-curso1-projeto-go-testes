@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
 #        so_linux_ubuntu_version: ['ubuntu-21.10', 'ubuntu-22.04', '>=ubuntu-23.04']
-        so_linux_ubuntu_version: ['ubuntu-21.10', '>=ubuntu-23.04']
+        so_linux_ubuntu_version: ['ubuntu-21.10', '>=ubuntu-23.04', 'windows-11']
         go_version: ['1.18', '1.17', '>=1.18']
     steps:
     - uses: actions/checkout@v4
